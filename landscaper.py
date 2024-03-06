@@ -14,7 +14,7 @@ tools = [
 ]
 
 def getInput():
-    result = input("You may [m]ow, [u]pgrade, [r]eset, or [c]lose. Choose one.")
+    result = input("You may [m]ow, [u]pgrade, [r]eset, or [c]lose. Choose one: ")
 
     if(result == "m"):
         earnMoney()
@@ -42,30 +42,29 @@ def earnMoney():
 
     player["money"] += tools[player["tools"]]["earns"]
 
-    print (f"You now have {player["money"]}")
-
-    win()
+    print (f"You now have ${player["money"]}")
 
     getInput()
 
 
 def upgradeTools():
-  
-  if player["money"] < tools[player["tools"]]["price"]:
+
+  if player["money"] >= tools[player["tools"]]["price"] + 1:
 
     print(f"You have purchased a new tool!")
 
     player["tools"] += 1
 
-    print(f"You now have {tools[player['tools']]['name']}")
+    print(f"You now have {tools[player['tools']]['name']}") 
 
     win()
 
   else:
 
-    print("You don't have enough money for that! Mow more lawns to earn more money!")
+    print("You don't have enough money for that! Mow more lawns to earn money!")
 
     getInput()
+
 
 
 def reset():
@@ -95,7 +94,7 @@ def win():
   else:
 
     print("You haven't won yet! Keep on mowing!")
-    
+
     getInput()
 
 
