@@ -18,53 +18,85 @@ def getInput():
 
     if(result == "m"):
         earnMoney()
-        return 1
+        
     
     if(result == "u"):
         upgradeTools()
-        return 1
+        
     
     if(result == "r"):
         reset()
-        return 1
+        
     
     if(result == "c"):
         close()
-        return 1
+        
     
-    print("choose a valid option")
+    print("Choose a valid option")
+
     getInput()
 
 def earnMoney():
+
     print(f"You mowed a lawn and earned ${tools[player["tools"]]["earns"]}!")
+
     player["money"] += tools[player["tools"]]["earns"]
-    print (player["money"])
+
+    print (f"You now have {player["money"]}")
+
     win()
+
     getInput()
+
 
 def upgradeTools():
+  
+  if player["money"] < tools[player["tools"]]["price"]:
+
     print(f"You have purchased a new tool!")
+
     player["tools"] += 1
-    print(tools[player["tools"]])
+
+    print(f"You now have {tools[player['tools']]['name']}")
+
     win()
+
+  else:
+
+    print("You don't have enough money for that! Mow more lawns to earn more money!")
+
     getInput()
+
 
 def reset():
+
     print("You've restarted the game. Time to get mowing!")
+
     player["money"] == 0
+
     tools[player["tools"]] == 0
+
     getInput()
+
 
 def close():
+
     print("Goodbye!")
+
     sys.exit()
 
+
 def win():
+  
   if player["money"] == 1000 and tools[player["tools"]]["name"] == "students":
+
     return "You have won! Congratulations!"
+  
   else:
+
     print("You haven't won yet! Keep on mowing!")
+    
     getInput()
 
-getInput()
 
+getInput()
