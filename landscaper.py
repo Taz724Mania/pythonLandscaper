@@ -33,29 +33,47 @@ def getInput():
 
 
 def earnMoney():
+    # pull the global variables
+    global player, tools
+    # create reliable variable for tool 
+    player_tool = player["tool"]
+    # tell the player how much they've earned based on the tool used
+    print(f"You earned ${tools[player_tool]["earns"]}!")
+    # update total player money
+    player["money"] += tools[player_tool]["earns"]
 
-    print(f"You mowed a lawn and earned ${tools[player["tool"]]["earns"]}!")
+    print(player["money"])
 
-    player["money"] += tools[player["tool"]]["earns"]
-
-    print (f"You now have ${player["money"]}")
 
     getInput()
 
 
 def upgradeTools():
+    global player, tools
+
+    # print(player, tools)
+
     # check how much money the player has
-    player_money = player["money"]
+    print(player["money"])
     # check which tool the player has
-    player_tool = player["tool"]
+    print(player["tool"])
     # write an if statement that checks if there is enough money to buy the tool and if there is they buy and upgrade, but if not, a womp womp message is returned
-    if player_money >= tools[player_tool + 1]["price"]:
+    if player["money"] >= tools[player["tool"] + 1]["price"]:
        # subtract the cost from player money 
-       player_money -= tools[player_tool + 1]["price"]
-       player_tool += 1
-       print(f"You bought a {tools[player_tool]["name"]}!")
+       player["money"] -= tools[player["tool"] + 1]["price"]
+
+    #    print(player["money"], "<<<player money after upgrade")
+
+       player["tool"] += 1
+
+    #    print(player["tool"], "<<<player tool after upgrade")
+
+       print(f"You bought a {tools[player["tool"]]["name"]}!")
+
     else:
-       if player_money < tools[player_tool + 1]["price"]:
+       
+       if player["money"] < tools[player["tool"] + 1]["price"]:
+          
           print("You don't have enough money for that!")
 
     getInput()
