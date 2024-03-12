@@ -2,7 +2,7 @@ import sys
 
 player = {
     "money": 0,
-    "tools": 0
+    "tool": 0
 }
 
 tools = [
@@ -14,7 +14,7 @@ tools = [
 ]
 
 def getInput():
-    result = input("You may [m]ow, [u]pgrade, [r]eset, or [c]lose. Choose one: ")
+    result = input("You may [m]ow, [u]pgrade, or [c]lose. Choose one: ")
 
     if(result == "m"):
         earnMoney()
@@ -24,23 +24,19 @@ def getInput():
         upgradeTools()
         
     
-    if(result == "r"):
-        reset()
-        
-    
     if(result == "c"):
         close()
         
-    
     print("Choose a valid option")
 
     getInput()
 
+
 def earnMoney():
 
-    print(f"You mowed a lawn and earned ${tools[player["tools"]]["earns"]}!")
+    print(f"You mowed a lawn and earned ${tools[player["tool"]]["earns"]}!")
 
-    player["money"] += tools[player["tools"]]["earns"]
+    player["money"] += tools[player["tool"]]["earns"]
 
     print (f"You now have ${player["money"]}")
 
@@ -48,32 +44,19 @@ def earnMoney():
 
 
 def upgradeTools():
-
-  if player["money"] >= tools[player["tools"]]["price"] + 1:
-
-    print(f"You have purchased a new tool!")
-
-    player["tools"] += 1
-
-    print(f"You now have {tools[player['tools']]['name']}") 
-
-    win()
-
-  else:
-
-    print("You don't have enough money for that! Mow more lawns to earn money!")
-
-    getInput()
-
-
-
-def reset():
-
-    print("You've restarted the game. Time to get mowing!")
-
-    player["money"] == 0
-
-    tools[player["tools"]] == 0
+    # check how much money the player has
+    player_money = player["money"]
+    # check which tool the player has
+    player_tool = player["tool"]
+    # write an if statement that checks if there is enough money to buy the tool and if there is they buy and upgrade, but if not, a womp womp message is returned
+    if player_money >= tools[player_tool + 1]["price"]:
+       # subtract the cost from player money 
+       player_money -= tools[player_tool + 1]["price"]
+       player_tool += 1
+       print(f"You bought a {tools[player_tool]["name"]}!")
+    else:
+       if player_money < tools[player_tool + 1]["price"]:
+          print("You don't have enough money for that!")
 
     getInput()
 
@@ -87,7 +70,7 @@ def close():
 
 def win():
   
-  if player["money"] == 1000 and tools[player["tools"]]["name"] == "students":
+  if player["money"] == 1000 and tools[player["tool"]]["name"] == "students":
 
     return "You have won! Congratulations!"
   
