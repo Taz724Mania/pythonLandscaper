@@ -90,7 +90,7 @@ def win():
   
   if player["money"] == 1000 and tools[player["tool"]]["name"] == "students":
 
-    return "You have won! Congratulations!"
+    return "You have won! Congratulations! :D"
   
   else:
 
